@@ -40,7 +40,7 @@ IF(WIN32)
     win32/tools/7z.dll win32/tools/libeay32.dll win32/tools/libiconv2.dll
     win32/tools/libintl3.dll win32/tools/libssl32.dll)
 
-  INSTALL(FILES ${WINUTILS_DLL_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}")
+  INSTALL(FILES ${WINUTILS_DLL_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}/tools")
 
   SET(WINUTILS_EXE_FILES
     win32/tools/7z.exe
@@ -59,7 +59,7 @@ IF(WIN32)
     win32/tools/uname.exe
     win32/tools/wget.exe)
 
-  INSTALL(PROGRAMS ${WINUTILS_EXE_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}")
+  INSTALL(PROGRAMS ${WINUTILS_EXE_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}/tools")
 
   SET(WGET_EXECUTABLE_NAME "wget")
   SET(MD5_EXECUTABLE_NAME "md5sum")
