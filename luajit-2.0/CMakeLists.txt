@@ -21,18 +21,18 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
 OPTION(WITH_AMALG "Build eveything in one shot (needs memory)" ON)
 
 SET(INSTALL_INCLUDE_SUBDIR "include" CACHE STRING "installation include subdirectory name")
-IF(WIN32)
-  SET(INSTALL_BIN_SUBDIR "." CACHE STRING "installation executable subdirectory name")
-  SET(INSTALL_LIB_SUBDIR "." CACHE STRING "installation library subdirectory name")
-  SET(INSTALL_LUA_PATH_SUBDIR "lua") # not editable
-  SET(INSTALL_LUA_CPATH_SUBDIR ".") # not editable
-ELSE()
+# IF(WIN32)
+#   SET(INSTALL_BIN_SUBDIR "." CACHE STRING "installation executable subdirectory name")
+#   SET(INSTALL_LIB_SUBDIR "." CACHE STRING "installation library subdirectory name")
+#   SET(INSTALL_LUA_PATH_SUBDIR "lua") # not editable
+#   SET(INSTALL_LUA_CPATH_SUBDIR ".") # not editable
+# ELSE()
   SET(INSTALL_BIN_SUBDIR "bin" CACHE STRING "installation executable subdirectory name")
   SET(INSTALL_LIB_SUBDIR "lib" CACHE STRING "installation library subdirectory name")
   SET(INSTALL_LUA_PATH_SUBDIR "share/lua/5.1") # not editable
   SET(INSTALL_LUA_LIB_SUBDIR "lib" CACHE STRING "installation lua lib subdirectory name")
   SET(INSTALL_LUA_CPATH_SUBDIR "${INSTALL_LUA_LIB_SUBDIR}/lua/5.1") # not editable
-ENDIF()
+# ENDIF()
 
 ADD_DEFINITIONS(-DLUA_MULTILIB="${INSTALL_LUA_LIB_SUBDIR}")
 
