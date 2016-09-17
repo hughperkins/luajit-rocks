@@ -41,28 +41,38 @@ IF(WIN32)
     win32/tools/libintl3.dll win32/tools/libssl32.dll)
 
   INSTALL(FILES ${WINUTILS_DLL_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}")
-   
+
   SET(WINUTILS_EXE_FILES
-    win32/tools/7z.exe win32/tools/cp.exe  # win32/tools/chmod.exe
-    win32/tools/find.exe win32/tools/ls.exe win32/tools/md5sum.exe
-    win32/tools/mkdir.exe win32/tools/mv.exe  # win32/tools/objdump.exe
-    win32/tools/pwd.exe win32/tools/rmdir.exe  # win32/tools/rm.exe
-    win32/tools/test.exe win32/tools/uname.exe win32/tools/wget.exe)
-  
+    win32/tools/7z.exe
+#    win32/tools/chmod.exe
+    win32/tools/cp.exe
+    win32/tools/find.exe
+    win32/tools/ls.exe
+    win32/tools/md5sum.exe
+    win32/tools/mkdir.exe
+    win32/tools/mv.exe
+#    win32/tools/objdump.exe
+    win32/tools/pwd.exe
+#    win32/tools/rm.exe
+    win32/tools/rmdir.exe
+    win32/tools/test.exe
+    win32/tools/uname.exe
+    win32/tools/wget.exe)
+
   INSTALL(PROGRAMS ${WINUTILS_EXE_FILES} DESTINATION "${INSTALL_BIN_SUBDIR}")
-    
+
   SET(WGET_EXECUTABLE_NAME "wget")
   SET(MD5_EXECUTABLE_NAME "md5sum")
   SET(UNAME_M "x64")
   SET(SHEBANG
-"rem=rem --[[
+"::rem:: --[[
 @setlocal&  set PATH=${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_SUBDIR};%PATH% & set luafile=\"%~f0\" & if exist \"%~f0.bat\" set luafile=\"%~f0.bat\"
 @${CMAKE_INSTALL_PREFIX}/${INSTALL_BIN_SUBDIR}/${LUA_EXE_NAME}.exe %luafile% %*&  exit /b ]]")
 
 ELSE()
   FIND_PACKAGE(Wget)
   FIND_PACKAGE(MD5)
-  
+
   IF(NOT WGET_FOUND)
     FIND_PROGRAM(CURL_EXECUTABLE curl)
     IF(CURL_EXECUTABLE)
@@ -72,7 +82,7 @@ ELSE()
       MESSAGE(FATAL_ERROR "Downloader wget or curl not found")
     ENDIF()
   ENDIF()
-  
+
   IF(NOT MD5_FOUND)
     MESSAGE(FATAL_ERROR "MD5 checker not found")
   ENDIF()
@@ -93,19 +103,7 @@ ELSE()
 
 ENDIF()
 
-SET(LUAROCKS_FILES
-  fs/unix/tools.lua fs/unix.lua fs/win32/tools.lua fs/win32.lua fs/lua.lua
-  persist.lua list.lua require.lua repos.lua dir.lua make_manifest.lua
-  command_line.lua install.lua build/command.lua build/cmake.lua
-  build/make.lua build/builtin.lua fetch/cvs.lua fetch/git.lua
-  fetch/sscm.lua tools/patch.lua fetch/svn.lua tools/zip.lua tools/tar.lua
-  pack.lua type_check.lua make.lua path.lua remove.lua fs.lua manif.lua
-  add.lua deps.lua build.lua search.lua show.lua manif_core.lua fetch.lua
-  unpack.lua validate.lua cfg.lua download.lua help.lua util.lua index.lua
-  cache.lua refresh_cache.lua loader.lua admin_remove.lua fetch/hg.lua
-  fetch/git_file.lua new_version.lua lint.lua purge.lua
-  doc.lua fetch/git_http.lua path_cmd.lua upload.lua upload/api.lua upload/multipart.lua
-  write_rockspec.lua)
+FILE(GLOB_RECURSE LUAROCKS_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/src/luarocks" "${CMAKE_CURRENT_SOURCE_DIR}/src/luarocks/*.lua")
 
 FOREACH(LUAROCKS_FILE ${LUAROCKS_FILES})
   GET_FILENAME_COMPONENT(_subpath "${LUAROCKS_FILE}" PATH)
