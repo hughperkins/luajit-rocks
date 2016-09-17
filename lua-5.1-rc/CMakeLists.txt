@@ -12,18 +12,18 @@ SET(CMAKE_MODULE_PATH
   "${CMAKE_MODULE_PATH}")
 
 SET(INSTALL_INCLUDE_SUBDIR "include" CACHE STRING "installation include subdirectory name")
-IF(WIN32)
-  SET(INSTALL_BIN_SUBDIR "." CACHE STRING "installation executable subdirectory name")
-  SET(INSTALL_LIB_SUBDIR "." CACHE STRING "installation library subdirectory name")
-  SET(INSTALL_LUA_PATH_SUBDIR "lua") # not editable
-  SET(INSTALL_LUA_CPATH_SUBDIR ".") # not editable
-ELSE()
+# IF(WIN32)
+#   SET(INSTALL_BIN_SUBDIR "." CACHE STRING "installation executable subdirectory name")
+#   SET(INSTALL_LIB_SUBDIR "." CACHE STRING "installation library subdirectory name")
+#   SET(INSTALL_LUA_PATH_SUBDIR "lua") # not editable
+#   SET(INSTALL_LUA_CPATH_SUBDIR ".") # not editable
+# ELSE()
   SET(INSTALL_BIN_SUBDIR "bin" CACHE STRING "installation executable subdirectory name")
   SET(INSTALL_LIB_SUBDIR "lib" CACHE STRING "installation library subdirectory name")
   SET(INSTALL_LUA_PATH_SUBDIR "share/lua/5.1/" CACHE STRING "lua path subdirectory name")
   SET(INSTALL_LUA_LIB_SUBDIR "lib" CACHE STRING "installation lua lib subdirectory name")
   SET(INSTALL_LUA_CPATH_SUBDIR "${INSTALL_LUA_LIB_SUBDIR}/lua/5.1/" CACHE STRING "lua cpath subdirectory name")
-ENDIF()
+# ENDIF()
 
 IF(UNIX)
   SET(LUA_ROOT "${CMAKE_INSTALL_PREFIX}")

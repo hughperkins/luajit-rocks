@@ -1,5 +1,7 @@
 PROJECT(luajit-rocks)
 
+message("luajit-rocks/cmakelists.txt 1 INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
+
 # We want release compilation by default
 IF(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Release CACHE STRING
@@ -15,6 +17,8 @@ OPTION(WITH_LUA53 "Use Lua 5.3 instead of LuaJIT 2.1" OFF)
 OPTION(WITH_LUAJIT21 "Use LuaJIT 2.1 instead of LuaJIT 2.0" OFF)
 OPTION(WITH_SYSTEM_LUAJIT "Use LuaJIT installed on the system" OFF)
 OPTION(WITH_LUAROCKS "Install Luarocks" ON)
+
+message("luajit-rocks/cmakelists.txt 2 INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
 
 IF(WITH_LUA51)
   SET(LUA_EXE_NAME lua)
@@ -44,6 +48,8 @@ ELSE()
   SET(LUA_VERSION 5.1)
   ADD_SUBDIRECTORY(luajit-2.0)
 ENDIF()
+
+message("luajit-rocks/cmakelists.txt 3 INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
 
 IF(WITH_LUAROCKS)
   ADD_SUBDIRECTORY(luarocks)

@@ -21,18 +21,18 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
 OPTION(WITH_AMALG "Build eveything in one shot (needs memory)" ON)
 
 SET(INSTALL_INCLUDE_SUBDIR "include" CACHE STRING "installation include subdirectory name")
-IF(WIN32)
-  SET(INSTALL_BIN_SUBDIR "." CACHE STRING "installation executable subdirectory name")
-  SET(INSTALL_LIB_SUBDIR "." CACHE STRING "installation library subdirectory name")
-  SET(INSTALL_LUA_PATH_SUBDIR "lua") # not editable
-  SET(INSTALL_LUA_CPATH_SUBDIR ".") # not editable
-ELSE()
+# IF(WIN32)
+#   SET(INSTALL_BIN_SUBDIR "." CACHE STRING "installation executable subdirectory name")
+#   SET(INSTALL_LIB_SUBDIR "." CACHE STRING "installation library subdirectory name")
+#   SET(INSTALL_LUA_PATH_SUBDIR "lua") # not editable
+#   SET(INSTALL_LUA_CPATH_SUBDIR ".") # not editable
+# ELSE()
   SET(INSTALL_BIN_SUBDIR "bin" CACHE STRING "installation executable subdirectory name")
   SET(INSTALL_LIB_SUBDIR "lib" CACHE STRING "installation library subdirectory name")
   SET(INSTALL_LUA_PATH_SUBDIR "share/lua/5.1/" CACHE STRING "lua path subdirectory name")
   SET(INSTALL_LUA_LIB_SUBDIR "lib" CACHE STRING "installation lua lib subdirectory name")
   SET(INSTALL_LUA_CPATH_SUBDIR "${INSTALL_LUA_LIB_SUBDIR}/lua/5.1/" CACHE STRING "lua cpath subdirectory name")
-ENDIF()
+# ENDIF()
 
 ADD_DEFINITIONS(-DLUA_MULTILIB="${INSTALL_LUA_LIB_SUBDIR}")
 
@@ -163,6 +163,11 @@ ENDIF(NOT WIN32)
 CHECK_LIBRARY_EXISTS(m sin "" LUA_USE_LIBM)
 if ( LUA_USE_LIBM )
   list ( APPEND LIBS m )
+endif ()
+
+CHECK_LIBRARY_EXISTS(ncurses printw "" LUA_USE_LIBNCURSES)
+if ( LUA_USE_LIBNCURSES )
+  list ( APPEND LIBS ncurses )
 endif ()
 
 SET(CMAKE_THREAD_PREFER_PTHREAD TRUE)
@@ -364,8 +369,12 @@ include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR} dynasm src)
 
 IF(WITH_AMALG)
   add_library(libluajit SHARED src/ljamalg.c ${DEPS} )
+  add_library(luajit-static STATIC src/ljamalg.c ${DEPS} )
+  set_property(TARGET luajit-static PROPERTY POSITION_INDEPENDENT_CODE 1)
 ELSE()
   add_library(libluajit SHARED ${SRC_LJCORE} ${DEPS} )
+  add_library(luajit-static STATIC ${SRC_LJCORE} ${DEPS} )
+  set_property(TARGET luajit-static PROPERTY POSITION_INDEPENDENT_CODE 1)
 ENDIF()
 
 target_link_libraries (libluajit ${LIBS} )
