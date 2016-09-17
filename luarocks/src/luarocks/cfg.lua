@@ -407,7 +407,8 @@ if cfg.platforms.windows then
    defaults.variables.LUA_INCDIR = site_config.LUA_INCDIR and site_config.LUA_INCDIR:gsub("\\", "/") or "c:/lua"..cfg.lua_version.."/include"
    defaults.variables.LUA_LIBDIR = site_config.LUA_LIBDIR and site_config.LUA_LIBDIR:gsub("\\", "/") or "c:/lua"..cfg.lua_version.."/lib"
 
-   defaults.makefile = "Makefile.win"
+   defaults.cmake_generator = "NMake Makefiles"
+   defaults.makefile = "Makefile"
    defaults.variables.MAKE = "nmake"
    defaults.variables.CC = "cl"
    defaults.variables.RC = "rc"
