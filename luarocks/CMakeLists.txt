@@ -27,6 +27,8 @@ SET(INSTALL_INCLUDE_SUBDIR "include" CACHE STRING "installation include subdirec
   SET(INSTALL_LUAROCKS_SYSCONF_SUBDIR "etc/luarocks" CACHE STRING "installation luarocks sysconfig subdirectory name")
 #ENDIF()
 
+message("INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
+
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
                       "${CMAKE_MODULE_PATH}")
 
