@@ -3,6 +3,8 @@ project(luarocks)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6 FATAL_ERROR)
 CMAKE_POLICY(VERSION 2.6)
 
+message("luarocks/cmakelists.txt 1 INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
+
 IF(WIN32)
   SET(SCRIPT_SUFFIX .bat)
   SET(EXE_SUFFIX .exe)
@@ -27,7 +29,7 @@ SET(INSTALL_INCLUDE_SUBDIR "include" CACHE STRING "installation include subdirec
   SET(INSTALL_LUAROCKS_SYSCONF_SUBDIR "etc/luarocks" CACHE STRING "installation luarocks sysconfig subdirectory name")
 #ENDIF()
 
-message("INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
+message("luarocks/cmakelists.txt 2 INSTALL_BIN_SUBDIR ${INSTALL_BIN_SUBDIR}")
 
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
                       "${CMAKE_MODULE_PATH}")
