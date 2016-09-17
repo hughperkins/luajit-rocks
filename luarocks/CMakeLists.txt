@@ -41,7 +41,7 @@ IF(WIN32)
   SET(WINUTILS_EXE_FILES
     win32/tools/7z.exe win32/tools/cp.exe  # win32/tools/chmod.exe
     win32/tools/find.exe win32/tools/ls.exe win32/tools/md5sum.exe
-    win32/tools/mkdir.exe win32/tools/mv.exe win32/tools/objdump.exe
+    win32/tools/mkdir.exe win32/tools/mv.exe  # win32/tools/objdump.exe
     win32/tools/pwd.exe win32/tools/rm.exe win32/tools/rmdir.exe
     win32/tools/test.exe win32/tools/uname.exe win32/tools/wget.exe)
   
